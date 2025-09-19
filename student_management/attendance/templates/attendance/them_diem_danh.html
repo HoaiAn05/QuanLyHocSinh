@@ -1,0 +1,31 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary">Thêm điểm danh</h2>
+
+  <form method="post" class="card p-4 shadow-sm">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_hoc_sinh" class="form-label">Học sinh</label>
+      {{ form.hoc_sinh|add_class:"form-select" }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_ngay" class="form-label">Ngày</label>
+      <input type="date" name="ngay" id="id_ngay" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_trang_thai" class="form-label">Trạng thái</label>
+      {{ form.trang_thai|add_class:"form-select" }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a href="{% url 'danh_sach_diem_danh' %}" class="btn btn-secondary">Quay lại</a>
+  </form>
+</div>
+{% endblock %}

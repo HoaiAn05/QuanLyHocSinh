@@ -1,0 +1,53 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+
+<h4>Thêm học sinh chưa có lớp</h4>
+<form method="post" action="{% url 'add_student_to_class' lop.id %}">
+    {% csrf_token %}
+    <select name="student_id" class="form-control">
+        {% for hs in free_students %}
+        <option value="{{ hs.id }}">{{ hs.ho_ten }} ({{ hs.ngay_sinh|date:"d/m/Y" }})</option>
+        {% empty %}
+        <option disabled>Không còn học sinh nào chưa có lớp</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Thêm vào lớp</button>
+</form>
+
+<h3>Danh sách học sinh trong lớp</h3>
+<p>Lớp: {{ lop.name }}</p>
+<p>GVCN: {{ lop.giao_vien_chu_nhiem.ho_ten }}</p>
+<p>Năm học: {{ lop.nam_hoc.ten_nam }}</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Họ tên</th>
+        <th>Ngày sinh</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for hs in students %}
+    <tr>
+        <td>{{ hs.ho_ten }}</td>
+        <td>{{ hs.ngay_sinh|date:"d/m/Y" }}</td>
+        <td>
+            <a href="{% url 'student_update' lop.id hs.id %}" class="btn btn-warning btn-sm">Sửa</a>
+            <a href="{% url 'remove_student_from_class' lop.id hs.id %}" class="btn btn-secondary btn-sm">Rời lớp</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Chưa có học sinh nào trong lớp.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+
+
+{% endblock %}

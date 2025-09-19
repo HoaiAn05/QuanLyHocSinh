@@ -1,0 +1,31 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<h3>Bảng điểm lớp {{ lop.name }} - Môn {{ mon_hoc.ten_mon }}</h3>
+
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Học sinh</th>
+            <th>Điểm miệng</th>
+            <th>Điểm 15 phút</th>
+            <th>Điểm GK</th>
+            <th>Điểm CK</th>
+            <th>Trung bình</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in bang_diem %}
+        <tr>
+            <td>{{ row.hoc_sinh.ho_ten }}</td>
+            <td>{{ row.diem_mieng|join:", " }}</td>
+            <td>{{ row.diem_15p|join:", " }}</td>
+            <td>{{ row.diem_gk|join:", " }}</td>
+            <td>{{ row.diem_ck|join:", " }}</td>
+            <td>{{ row.tb }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

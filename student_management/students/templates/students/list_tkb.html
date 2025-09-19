@@ -1,0 +1,37 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Quản lý thời khóa biểu</h2>
+    <a href="{% url 'tkb_create' %}" class="btn btn-success mb-3">+ Thêm tiết học</a>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <th>Thứ</th>
+                <th>Tiết</th>
+                <th>Lớp</th>
+                <th>Môn</th>
+                <th>Giáo viên</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tiet in tkb %}
+            <tr>
+                <td>Thứ {{ tiet.thu }}</td>
+                <td>{{ tiet.tiet }}</td>
+                <td>{{ tiet.phan_cong.lop.name }}</td>
+                <td>{{ tiet.phan_cong.mon_hoc.ten_mon }}</td>
+                <td>{{ tiet.phan_cong.giao_vien.ho_ten }}</td>
+                <td>
+                    <a href="{% url 'tkb_update' tiet.id %}" class="btn btn-sm btn-primary">Sửa</a>
+                    <a href="{% url 'tkb_delete' tiet.id %}" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6">Chưa có dữ liệu</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

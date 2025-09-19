@@ -1,0 +1,64 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Báo cáo điểm</h2>
+
+    <form method="get" class="mb-3">
+        <label>Năm học:</label>
+        <select name="nam">
+            {% for n in nam_list %}
+            <option value="{{ n.id }}" {% if nam_hoc and n.id == nam_hoc.id %}selected{% endif %}>{{ n.ten_nam }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Môn học:</label>
+        <select name="mon">
+            <option value="">---</option>
+            {% for m in mon_list %}
+            <option value="{{ m.id }}" {% if mon_hoc and m.id == mon_hoc.id %}selected{% endif %}>{{ m.ten_mon }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Lớp học:</label>
+        <select name="lop">
+            <option value="">---</option>
+            {% for l in lop_list %}
+            <option value="{{ l.id }}" {% if lop_hoc and l.id == lop_hoc.id %}selected{% endif %}>{{ l.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary">Xem</button>
+    </form>
+
+    {% if tong > 0 %}
+    <p><b>Tổng số HS:</b> {{ tong }}</p>
+    <p><b>Đạt (>=5):</b> {{ dat }} ({{ ti_le_dat }}%)</p>
+    <p><b>Không đạt (<5):</b> {{ khongdat }} ({{ ti_le_khongdat }}%)</p>
+
+    <div style="width: 600px; height: 400px; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+    {% else %}
+    <p class="text-danger">Chưa có dữ liệu</p>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                data: {{ data|safe }},
+                backgroundColor: ['#28a745', '#dc3545'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+{% endblock %}

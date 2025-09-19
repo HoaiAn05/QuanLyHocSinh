@@ -1,0 +1,49 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h2 class="mb-4 text-center">Hồ sơ cá nhân</h2>
+
+        <!-- Avatar -->
+        <div class="text-center mb-4">
+            {% if request.user.avatar %}
+                <img src="{{ request.user.avatar.url }}" alt="avatar" class="rounded-circle shadow" width="150" height="150">
+            {% else %}
+                <img src="https://ui-avatars.com/api/?name={{ giao_vien.ho_ten|default:request.user.username }}&background=0D8ABC&color=fff&size=150"
+                     alt="avatar" class="rounded-circle shadow">
+            {% endif %}
+        </div>
+
+        <!-- Thông tin cá nhân -->
+        <div class="mb-4">
+            <h4 class="text-primary">Thông tin cá nhân</h4>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Họ tên:</strong> {{ giao_vien.ho_ten }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ giao_vien.email }}</li>
+                <li class="list-group-item"><strong>Số điện thoại:</strong> {{ giao_vien.so_dien_thoai }}</li>
+                <li class="list-group-item"><strong>Môn dạy:</strong> {{ giao_vien.mon_day.ten_mon }}</li>
+            </ul>
+        </div>
+
+        <!-- Form upload avatar -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h4 class="text-primary">Cập nhật ảnh đại diện</h4>
+                {{ avatar_form.as_p }}
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'doi_mat_khau' %}" class="btn btn-outline-warning">
+                    Đổi mật khẩu
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Cập nhật avatar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

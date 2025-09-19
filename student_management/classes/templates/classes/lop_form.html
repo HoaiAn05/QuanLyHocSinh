@@ -1,0 +1,21 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">
+        {% if form.instance.pk %}
+             Chỉnh sửa lớp học
+        {% else %}
+             Thêm lớp học
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary"> Lưu</button>
+        <a href="{% url 'lop_list' %}" class="btn btn-secondary"> Hủy</a>
+    </form>
+</div>
+{% endblock %}

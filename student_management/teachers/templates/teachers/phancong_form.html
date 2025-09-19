@@ -1,0 +1,61 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Thêm phân công</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Chọn năm học -->
+        <div class="mb-3">
+            <label for="nam_hoc" class="form-label">Năm học</label>
+            <select name="nam_hoc" id="nam_hoc" class="form-control" required>
+                <option value="">-- Chọn năm học --</option>
+                {% for nh in nam_hocs %}
+                <option value="{{ nh.id }}">{{ nh.ten_nam }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Chọn lớp -->
+        <div class="mb-3">
+            <label for="lop" class="form-label">Lớp</label>
+            <select name="lop" id="lop" class="form-control" required>
+                <option value="">-- Chọn lớp --</option>
+                {% for lop in lops %}
+                <option value="{{ lop.id }}">{{ lop.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Chọn giáo viên -->
+        <div class="mb-3">
+            <label for="giao_vien" class="form-label">Giáo viên</label>
+            <select name="giao_vien" id="giao_vien" class="form-control" required>
+                <option value="">-- Chọn giáo viên --</option>
+                {% for gv in giao_viens %}
+                <option value="{{ gv.id }}" data-mon="{{ gv.mon_day.ten_mon }}">
+                    {{ gv.ho_ten }} ({{ gv.mon_day.ten_mon }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Môn học tự động điền -->
+        <div class="mb-3">
+            <label for="mon_hoc" class="form-label">Môn học</label>
+            <input type="text" id="mon_hoc" class="form-control" readonly>
+        </div>
+
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a href="{% url 'phancong_list' %}" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+
+<script>
+document.getElementById("giao_vien").addEventListener("change", function() {
+    let selectedOption = this.options[this.selectedIndex];
+    let monHoc = selectedOption.getAttribute("data-mon");
+    document.getElementById("mon_hoc").value = monHoc || "";
+});
+</script>
+{% endblock %}

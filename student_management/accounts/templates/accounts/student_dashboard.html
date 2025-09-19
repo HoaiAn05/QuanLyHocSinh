@@ -1,0 +1,33 @@
+<!--student_dashboard.html -->
+{% extends 'accounts/base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Chào {{user.username}}!</h2>
+<div class="row g-4">
+    <div class="col-md-4">
+        <a href="{% url 'hs_profile'  %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-person-circle fs-1 text-primary"></i>
+                <h5 class="mt-2">Thông tin cá nhân</h5>
+            </div>
+        </a>
+    </div>
+     <div class="col-md-4">
+        <a href="{% url 'chon_hoc_ky_hs' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-bar-chart-line fs-1 text-success"></i>
+                <h5 class="mt-2">Kết quả học tập</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'xem_thoi_khoa_bieu' lop_id %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-calendar-week fs-1 text-warning"></i>
+                <h5 class="mt-2">Xem thời khóa biểu</h5>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

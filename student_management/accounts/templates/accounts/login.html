@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập - Quản lý học sinh</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: url("https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center fixed;
+      background-size: cover;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+    }
+    .login-card h3 {
+      font-weight: 600;
+      color: #0d6efd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card login-card shadow-lg p-4" style="width: 400px;">
+    <div class="text-center mb-3">
+      <i class="bi bi-mortarboard-fill" style="font-size: 3rem; color: #0d6efd;"></i>
+      <h3 class="mt-2">Đăng nhập</h3>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Tên đăng nhập</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+
+      {% if error_message %}
+        <div class="alert alert-danger py-1">{{ error_message }}</div>
+      {% endif %}
+
+      <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+    </form>
+  </div>
+</div>
+
+{% if messages %}
+  <script>
+    {% for message in messages %}
+      alert("{{ message|escapejs }}");
+    {% endfor %}
+  </script>
+{% endif %}
+
+<!-- Bootstrap icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+</body>
+</html>

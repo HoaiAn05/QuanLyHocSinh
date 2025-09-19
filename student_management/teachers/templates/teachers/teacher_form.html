@@ -1,0 +1,42 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{% if teacher %}Sửa giáo viên{% else %}Thêm giáo viên{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if not teacher %}
+        <div class="mb-3">
+            <label>Tài khoản (username)</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Mật khẩu</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+            <label>Họ tên</label>
+            <input type="text" name="ho_ten" class="form-control" value="{{ teacher.ho_ten|default:'' }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" value="{{ teacher.email|default:'' }}">
+        </div>
+        <div class="mb-3">
+            <label>Số điện thoại</label>
+            <input type="text" name="so_dien_thoai" class="form-control" value="{{ teacher.so_dien_thoai|default:'' }}">
+        </div>
+        <div class="mb-3">
+            <label>Môn dạy</label>
+            <select name="mon_day" class="form-select" required>
+                <option value="">-- Chọn môn --</option>
+                {% for mon in mon_hoc_list %}
+                <option value="{{ mon.id }}" {% if teacher.mon_day.id == mon.id %}selected{% endif %}>{{ mon.ten_mon }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a href="{% url 'teacher_list' %}" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+{% endblock %}

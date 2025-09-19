@@ -1,0 +1,16 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Xác nhận xóa</h2>
+    <p>Bạn có chắc muốn xóa phân công:
+       <strong>{{ phancong.giao_vien.ho_ten }}</strong> dạy
+       <strong>{{ phancong.mon_hoc.ten_mon }}</strong> lớp
+       <strong>{{ phancong.lop.name }}</strong>?
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a href="{% url 'phancong_list' %}" class="btn btn-secondary"> Hủy</a>
+    </form>
+</div>
+{% endblock %}

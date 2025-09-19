@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<h2>{{ tb.tieu_de }}</h2>
+<p><strong>Ngày gửi:</strong> {{ tb.ngay_gui|date:"d/m/Y H:i" }}</p>
+<p>{{ tb.noi_dung }}</p>
+
+<a href="{% url 'danh_sach_thong_bao' %}" class="btn btn-secondary">Quay lại</a>
+<a href="{% url 'xoa_thong_bao' tb.id %}" class="btn btn-danger">Xóa</a>
+{% endblock %}

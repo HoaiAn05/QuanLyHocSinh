@@ -1,0 +1,41 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Danh sách phân công giảng dạy</h2>
+
+
+    <a href="{% url 'phancong_add' %}" class="btn btn-primary mb-3"> Thêm phân công</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Lớp</th>
+                <th>Năm học</th>
+                <th>Giáo viên</th>
+                <th>Môn học</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pc in phancongs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ pc.lop.name }}</td>
+                <td>{{ pc.nam_hoc.ten_nam }}</td>
+                <td>{{ pc.giao_vien.ho_ten }}</td>
+                <td>{{ pc.mon_hoc.ten_mon }}</td>
+                <td>
+                    <a href="{% url 'phancong_edit' pc.id %}" class="btn btn-sm btn-warning"> Sửa</a>
+                    <a href="{% url 'phancong_confirm_delete' pc.id %}" class="btn btn-sm btn-danger"> Xóa</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">Chưa có phân công nào.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

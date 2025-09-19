@@ -1,0 +1,11 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<h2>Xóa thông báo</h2>
+<p>Bạn có chắc chắn muốn xóa thông báo: <strong>{{ tb.tieu_de }}</strong> không?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Xóa</button>
+  <a href="{% url 'danh_sach_thong_bao' %}" class="btn btn-secondary">Hủy</a>
+</form>
+{% endblock %}

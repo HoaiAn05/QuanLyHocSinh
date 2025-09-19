@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-danger"> Xác nhận xóa lớp học</h2>
+
+    <p>Bạn có chắc chắn muốn xóa lớp học <strong>{{ lop.name }}</strong> không?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger"> Xóa</button>
+        <a href="{% url 'lop_list' %}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+{% endblock %}

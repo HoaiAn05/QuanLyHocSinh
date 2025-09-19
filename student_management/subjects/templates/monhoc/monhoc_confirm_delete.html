@@ -1,0 +1,29 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Xác nhận xóa môn học</h4>
+        </div>
+        <div class="card-body">
+            <p>Bạn có chắc chắn muốn xóa môn học
+                <strong>{{ object.ten_mon }}</strong> (Mã: {{ object.ma_mon }})?
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'monhoc_list' %}" class="btn btn-secondary">
+                        Hủy
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        Xóa
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<h3>Lịch dạy của {{ request.user.giaovien.ho_ten }}</h3>
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Thứ</th>
+            <th>Tiết</th>
+            <th>Lớp</th>
+            <th>Môn</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tiet in lich %}
+        <tr>
+            <td>Thứ {{ tiet.thu }}</td>
+            <td>{{ tiet.tiet }}</td>
+            <td>{{ tiet.phan_cong.lop.name }}</td>
+            <td>{{ tiet.phan_cong.mon_hoc.ten_mon }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Không có lịch dạy</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

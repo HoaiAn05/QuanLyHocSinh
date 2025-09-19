@@ -1,0 +1,44 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<h2>📋 Danh sách điểm danh</h2>
+
+<div style="margin-bottom: 15px;">
+    <a href="{% url 'them_diem_danh' %}" class="btn btn-primary">Thêm điểm danh</a>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Học sinh</th>
+      <th>Lớp</th>
+      <th>Ngày</th>
+      <th>Trạng thái</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.hoc_sinh.ho_ten }}</td>
+      <td>{{ r.hoc_sinh.lop.name }}</td>
+      <td>{{ r.ngay|date:"d/m/Y" }}</td>
+      <td>
+        {% if r.trang_thai == "C" %}
+           Có mặt
+        {% elif r.trang_thai == "V" %}
+           Vắng
+        {% elif r.trang_thai == "M" %}
+           Muộn
+        {% else %}
+          {{ r.get_trang_thai_display }}
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4" style="text-align: center;">Chưa có dữ liệu điểm danh</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

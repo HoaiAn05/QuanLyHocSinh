@@ -1,0 +1,28 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<h3>Thời khóa biểu lớp {{ request.user.hocsinh.lop.name }}</h3>
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>Thứ</th>
+            <th>Tiết</th>
+            <th>Môn</th>
+            <th>Giáo viên</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tiet in tkb %}
+        <tr>
+            <td>Thứ {{ tiet.thu }}</td>
+            <td>{{ tiet.tiet }}</td>
+            <td>{{ tiet.phan_cong.mon_hoc.ten_mon }}</td>
+            <td>{{ tiet.phan_cong.giao_vien.ho_ten }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Không có thời khóa biểu</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

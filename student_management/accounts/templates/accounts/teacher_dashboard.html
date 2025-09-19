@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Chào {{user.username}}!</h2>
+<div class="row g-4">
+    <div class="col-md-4">
+        <a href="{% url 'giao_vien_profile' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-person-lines-fill fs-1 text-primary"></i>
+                <h5 class="mt-2">Hồ sơ cá nhân</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'chon_lop_nam' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-journal-text fs-1 text-success"></i>
+                <h5 class="mt-2">Quản lý điểm</h5>
+            </div>
+        </a>
+    </div>
+   <div class="col-md-4">
+        <a href="{% url 'xem_lich_day' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-table fs-1 text-warning"></i>
+                <h5 class="mt-2">Lịch dạy</h5>
+            </div>
+        </a>
+    </div>
+     <div class="col-md-4">
+        <a href="{% url 'danh_sach_diem_danh' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-award-fill fs-1 text-danger"></i>
+                <h5 class="mt-2">Điểm danh</h5>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

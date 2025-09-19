@@ -1,0 +1,78 @@
+<!-- admin_dashboard -->
+{% extends 'accounts/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Chào {{user.username}}!</h2>
+<div class="row g-4">
+    <!-- Quản lý học sinh -->
+    <div class="col-md-4">
+        <a href="{% url 'student_list' %}?role=student" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-people fs-1 text-primary"></i>
+                <h5 class="mt-2">Quản lý học sinh</h5>
+            </div>
+        </a>
+    </div>
+
+    <!-- Quản lý giáo viên -->
+    <div class="col-md-4">
+        <a href="{% url 'teacher_list' %}?role=teacher" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-person-badge fs-1 text-success"></i>
+                <h5 class="mt-2">Quản lý giáo viên</h5>
+            </div>
+        </a>
+    </div>
+
+    <!-- Quản lý lớp học -->
+    <div class="col-md-4">
+        <a href="{% url 'lop_list' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-building-add fs-1 text-warning"></i>
+                <h5 class="mt-2">Quản lý lớp học</h5>
+            </div>
+        </a>
+    </div>
+
+    <!-- Quản lý môn học -->
+    <div class="col-md-4">
+        <a href="{% url 'monhoc_list' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-book fs-1 text-warning"></i>
+                <h5 class="mt-2">Quản lý môn học</h5>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{% url 'tkb_list' %}" class="text-decoration-none text-dark">
+            <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-table fs-1 text-primary"></i>
+                <h5 class="mt-2">Quản lý thời khóa biểu</h5>
+            </div>
+        </a>
+    </div>
+
+    <!-- Báo cáo -->
+    <div class="col-md-4">
+         <a href="{% url 'bao_cao_diem' %}" class="text-decoration-none text-dark">
+             <div class="card shadow-sm text-center p-3">
+                <i class="bi bi-clipboard-data fs-1 text-danger"></i>
+                <h5 class="mt-2">Báo cáo</h5>
+             </div>
+         </a>
+    </div>
+
+      <div class="col-md-4">
+         <a href="{% url 'danh_sach_thong_bao' %}" class="text-decoration-none text-dark">
+             <div class="card shadow-sm text-center p-3">
+                 <i class="bi bi-megaphone fs-1 text-primary"></i>
+                <h5 class="mt-2">Thông báo</h5>
+             </div>
+         </a>
+    </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h2 class="mb-4 text-center">{{ title }}</h2>
+
+        {% if delete %}
+            <p>Bạn có chắc muốn <strong>xóa</strong> tiết học:
+                <b>{{ tiet.phan_cong.lop.name }}</b> -
+                <b>{{ tiet.phan_cong.mon_hoc.ten_mon }}</b>
+                ({{ tiet.phan_cong.giao_vien.ho_ten }})
+                - Thứ {{ tiet.thu }}, Tiết {{ tiet.tiet }}?
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'tkb_list' %}" class="btn btn-secondary">Hủy</a>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </div>
+            </form>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'tkb_list' %}" class="btn btn-secondary">Hủy</a>
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

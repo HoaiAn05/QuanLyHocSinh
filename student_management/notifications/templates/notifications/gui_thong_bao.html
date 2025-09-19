@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4"> Gửi thông báo</h2>
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.tieu_de.label_tag }}
+            {{ form.tieu_de }}
+            {% if form.tieu_de.errors %}
+                <div class="text-danger small">{{ form.tieu_de.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.noi_dung.label_tag }}
+            {{ form.noi_dung }}
+            {% if form.noi_dung.errors %}
+                <div class="text-danger small">{{ form.noi_dung.errors }}</div>
+            {% endif %}
+        </div>
+    </form>
+    <button type="submit" class="btn btn-primary">Gửi</button>
+    <a href="{% url 'danh_sach_thong_bao' %}" class="btn btn-secondary ">Quay lại</a>
+</div>
+{% endblock %}

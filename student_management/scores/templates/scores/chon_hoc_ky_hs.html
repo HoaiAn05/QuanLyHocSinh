@@ -1,0 +1,29 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h4 class="text-center">Chọn năm học và học kỳ</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nam_hoc">Năm học:</label>
+                <select name="nam_hoc" id="nam_hoc" class="form-select" required>
+                    {% for nh in nam_hoc_list %}
+                        <option value="{{ nh.id }}">{{ nh.ten_nam }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="hoc_ky">Học kỳ:</label>
+                <select name="hoc_ky" id="hoc_ky" class="form-select" required>
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Xem điểm</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
